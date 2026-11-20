@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  <nav class="nav-list">
+    @for (item of navigation; track item.label) {
+      <a
+        class="nav-item"
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        (click)="closeNavigation()"
+      >
+        <div class="d-flex gap-2">
+          <img [src]="item.icon" [alt]="item.icon" width="20" />
+          <span>{{ item.label }}</span>
+        </div>
+      </a>
+    }
+  </nav>
+
+  <a class="btn btn-primary d-flex justify-content-center mt-5">
+    <mat-icon>add</mat-icon>
+    New Task
+  </a>
+</aside>

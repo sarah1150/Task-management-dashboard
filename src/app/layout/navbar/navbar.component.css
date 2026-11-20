@@ -1,0 +1,128 @@
+.topbar {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  display: flex;
+  height: 63px;
+  flex: 0 0 63px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 27px;
+  border-bottom: 1px solid #e9edf2;
+  background: #fff;
+}
+
+.mobile-menu-button {
+  display: none;
+  color: #5e6b80;
+}
+
+.global-search {
+  display: flex;
+  width: min(390px, 55%);
+  height: 35px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 9px;
+  border: 1px solid #e6ebf1;
+  border-radius: 7px;
+  color: #8995a5;
+  background: #fff;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.global-search:focus-within {
+  border-color: #93b8e8;
+  box-shadow: 0 0 0 3px #2884e80e;
+}
+.global-search mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+.global-search input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  color: #334157;
+  background: transparent;
+  font: inherit;
+  font-size: 10px;
+}
+.global-search input::placeholder {
+  color: #a1aab7;
+}
+.global-search kbd {
+  padding: 3px 5px;
+  border: 1px solid #e8ecf1;
+  border-radius: 4px;
+  color: #a1aab7;
+  background: #fafbfd;
+  font-size: 8px;
+}
+
+.title {
+  color: #1976d2;
+}
+
+.bell {
+  background-color: #1976d2;
+  border-radius: 50%;
+  padding: 6px 7px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+@media (max-width: 1000px) {
+  .main-area {
+    margin-left: 208px;
+  }
+
+  .topbar {
+    padding: 0 18px;
+  }
+}
+@media (max-width: 720px) {
+  .main-area {
+    margin-left: 0;
+  }
+  .title {
+    display: none;
+  }
+  .topbar {
+    height: 57px;
+    flex-basis: 57px;
+    gap: 9px;
+    padding: 0 12px;
+  }
+  .global-search {
+    width: min(290px, 100%);
+  }
+
+  .topbar-actions {
+    gap: 6px;
+  }
+}
+@media (max-width: 390px) {
+  .topbar {
+    gap: 4px;
+    padding: 0 8px;
+  }
+  .global-search {
+    width: min(90px, 60%);
+    padding: 0 4px;
+  }
+  .topbar-actions {
+    gap: 2px;
+  }
+  .topbar-divider {
+    display: none;
+  }
+  .top-user mat-icon {
+    display: none;
+  }
+}

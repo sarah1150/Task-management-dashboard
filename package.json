@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^22.3.0",
     "@angular/router": "^22.3.0",
     "@ngrx/store": "^22.0.1",
+    "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
