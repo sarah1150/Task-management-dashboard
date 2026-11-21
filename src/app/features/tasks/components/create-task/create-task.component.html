@@ -1,0 +1,91 @@
+<h4 class="border-bottom">Create a new task</h4>
+
+<div class="row mt-4">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="col-8">
+      <div class="d-flex flex-column gap-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Task title</mat-label>
+          <input matInput formControlName="title" maxlength="90" />
+          @if (form.controls.title.hasError('required') || form.controls.title.hasError('blank')) {
+            <mat-error>Please enter a task title.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            rows="3"
+            maxlength="320"
+            placeholder="Add a few details..."
+          ></textarea>
+          @if (
+            form.controls.description.hasError('required') ||
+            form.controls.description.hasError('blank')
+          ) {
+            <mat-error>Please add a short description.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+              @for (priority of priorities; track priority) {
+                <mat-option [value]="priority">{{ priority }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              @for (status of statuses; track status) {
+                <mat-option [value]="status">{{ status }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Due date</mat-label>
+            <input matInput type="date" formControlName="dueDate" />
+            @if (form.controls.dueDate.hasError('required')) {
+              <mat-error>Choose a due date.</mat-error>
+            }
+            @if (form.controls.dueDate.hasError('pastDate')) {
+              <mat-error>Choose today or a future date.</mat-error>
+            }
+            @if (form.controls.dueDate.hasError('invalidDate')) {
+              <mat-error>Enter a valid date.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Assignee</mat-label>
+            <mat-select formControlName="assigneeId">
+              @for (user of users; track user.id) {
+                <mat-option [value]="user.id">{{ user.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ form.invalid ? 'Create task' : 'Save changes' }}
+      </button>
+    </div>
+  </form>
+</div>

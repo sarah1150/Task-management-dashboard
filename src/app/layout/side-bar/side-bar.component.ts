@@ -1,13 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { NavigationItem } from '../types/navigation-item';
 import { MATERIAL_IMPORTS } from '../../shared/material.imports';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css'],
-  imports: [MATERIAL_IMPORTS, RouterLink],
+  imports: [...MATERIAL_IMPORTS, RouterLink],
 })
 export class SideBarComponent implements OnInit {
   navigation: NavigationItem[] = [
