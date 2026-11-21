@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "api": "json-server --watch db.json --port 3600",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:coverage": "ng test --coverage",
+    "lint": "ng lint",
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
@@ -19,7 +23,9 @@
     "@angular/material": "^22.3.0",
     "@angular/platform-browser": "^22.3.0",
     "@angular/router": "^22.3.0",
+    "@ngrx/effects": "^22.0.1",
     "@ngrx/store": "^22.0.1",
+    "@ngrx/store-devtools": "^22.0.1",
     "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
     "rxjs": "~7.8.0",
@@ -30,6 +36,7 @@
     "@angular/cli": "^22.3.0",
     "@angular/compiler-cli": "^22.3.0",
     "jsdom": "^31.0.0",
+    "json-server": "^0.17.4",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"

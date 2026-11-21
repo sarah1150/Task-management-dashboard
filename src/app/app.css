@@ -1,4 +1,18 @@
-.main {
-  background-color: #f5f7fa;
-  min-height: calc(100vh - 80px);
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background: #f5f7fa;
 }
