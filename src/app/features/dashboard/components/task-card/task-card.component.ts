@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MATERIAL_IMPORTS } from '../../../../shared/material.imports';
 import { Task } from '../../models/task';
 
@@ -7,6 +7,7 @@ import { Task } from '../../models/task';
   selector: 'app-task-card',
   templateUrl: './task-card.component.html',
   styleUrls: ['./task-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, ...MATERIAL_IMPORTS],
 })
 export class TaskCardComponent {

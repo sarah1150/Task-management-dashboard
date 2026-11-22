@@ -1,11 +1,5 @@
-import { Component, inject } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MATERIAL_IMPORTS } from '../../material.imports';
 import { TaskDraft } from '../../../features/dashboard/types/task-draft';
@@ -19,6 +13,7 @@ import { TasksPriority } from '../../../features/dashboard/types/task-priority';
   selector: 'app-task-form-dialog',
   templateUrl: './task-form-dialog.component.html',
   styleUrls: ['./task-form-dialog.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, MatDialogModule, ...MATERIAL_IMPORTS],
 })
 export class TaskFormDialogComponent {

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MATERIAL_IMPORTS } from '../../shared/material.imports';
 import { NavigationItem } from '../models/navigation-item';
@@ -10,6 +10,7 @@ import { ModalService } from '../../shared/service/modal.service';
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [...MATERIAL_IMPORTS, RouterLink],
 })
 export class SideBarComponent {

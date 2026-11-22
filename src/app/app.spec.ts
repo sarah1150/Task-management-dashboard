@@ -1,24 +1,42 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { App } from './app';
+import { loadStatistics, loadTasks, loadUsers } from './store/actions/tasks.actions';
 
 describe('App', () => {
+  let fixture: ComponentFixture<App>;
+  let store: MockStore;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-    })
-      .compileComponents();
+      providers: [provideMockStore()],
+    }).compileComponents();
+
+    store = TestBed.inject(MockStore);
+
+    spyOn(store, 'dispatch');
+
+    fixture = TestBed.createComponent(App);
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Task-management-dashboard');
+  it('should dispatch loadTasks on initialization', () => {
+    expect(store.dispatch).toHaveBeenCalledWith(loadTasks({}));
+  });
+
+  it('should dispatch loadUsers on initialization', () => {
+    expect(store.dispatch).toHaveBeenCalledWith(loadUsers({}));
+  });
+
+  it('should dispatch loadStatistics on initialization', () => {
+    expect(store.dispatch).toHaveBeenCalledWith(loadStatistics({}));
+  });
+
+  it('should dispatch all three actions on initialization', () => {
+    expect(store.dispatch).toHaveBeenCalledTimes(3);
   });
 });

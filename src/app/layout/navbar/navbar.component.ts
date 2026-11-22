@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MATERIAL_IMPORTS } from '../../shared/material.imports';
 import { Store } from '@ngrx/store';
 import { setTaskFilters } from '../../store/actions/tasks.actions';
@@ -8,6 +8,7 @@ import { selectTaskFilters } from '../../store/selectors/tasks.selectors';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [...MATERIAL_IMPORTS],
 })
 export class NavbarComponent {

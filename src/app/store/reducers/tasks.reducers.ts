@@ -37,7 +37,7 @@ export const initialTasksState: TasksState = {
   filters: { query: '', status: 'all', priority: 'all' },
 };
 
-/* Helper function to update if task already exists 
+/* Helper function to update if task already exists
 if Not exists it inserts the task */
 function updateOrInsertTask(tasks: Task[], updated: Task): Task[] {
   return tasks.some((task) => task.id === updated.id)
@@ -117,14 +117,7 @@ export const tasksReducer = createReducer(
     loading: false,
     error: null,
   })),
-  on(TaskActions.moveTaskSucceeded, (state, { task, reorderedTasks }) => {
-    const previous = state.tasks.find((item) => item.id === task.id);
-    const action =
-      task.status === 'done' && previous?.status !== 'done'
-        ? 'completed'
-        : previous?.status === 'done' && task.status !== 'done'
-          ? 'reopened'
-          : 'updated';
+  on(TaskActions.moveTaskSucceeded, (state, { reorderedTasks }) => {
     return {
       ...state,
       tasks: reorderedTasks.reduce(updateOrInsertTask, state.tasks),

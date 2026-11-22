@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MATERIAL_IMPORTS } from '../../../../shared/material.imports';
 import { Task } from '../../models/task';
@@ -11,6 +11,7 @@ import { TASK_STATUSES, TaskStatus } from '../../types/task-status';
   selector: 'app-task-board',
   templateUrl: './task-board.component.html',
   styleUrls: ['./task-board.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [...MATERIAL_IMPORTS, TaskCardComponent, DragDropModule, MatIconModule],
 })
 export class TaskBoardComponent {
