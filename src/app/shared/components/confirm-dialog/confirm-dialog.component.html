@@ -1,0 +1,9 @@
+<div class="confirm-icon"><mat-icon>delete_outline</mat-icon></div>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>{{ data.message }}</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="true">
+    {{ data.confirmLabel ?? 'Delete task' }}
+  </button>
+</mat-dialog-actions>

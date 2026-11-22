@@ -1,0 +1,69 @@
+<!-- Filters Section -->
+<section class="board-section" aria-label="Task board">
+  <div class="board-toolbar">
+    <div class="status-tabs" role="tablist" aria-label="Filter tasks by status">
+      @for (tab of statusTabs; track tab.value) {
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="this.data().filters.status === tab.value"
+          [class.active]="this.data().filters.status === tab.value"
+          (click)="setStatus(tab.value)"
+        >
+          {{ tab.label }}
+        </button>
+      }
+    </div>
+    <div class="toolbar-filters">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="filter-select">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          [value]="this.data().filters.priority"
+          (selectionChange)="setPriority($event.value)"
+        >
+          <mat-option value="all">All priorities</mat-option>
+          <mat-option value="high">High priority</mat-option>
+          <mat-option value="medium">Medium priority</mat-option>
+          <mat-option value="low">Low priority</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        class="new-task-button"
+        (click)="openCreateModal()"
+      >
+        <mat-icon>add</mat-icon> New task
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Tasks List -->
+@if (this.data().loading && !this.data().allTasks.length) {
+  <div class="loading-board" aria-label="Loading tasks">
+    @for (column of [1, 2, 3]; track column) {
+      <div class="loading-column">
+        <div class="skeleton skeleton-heading"></div>
+        @for (card of [1, 2, 3]; track card) {
+          <div class="skeleton skeleton-card"></div>
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <app-task-board
+    [tasks]="this.data().tasks"
+    (edit)="openEditModal($event)"
+    (remove)="confirmDeleteTask($event)"
+    (taskMoved)="onTaskMoved($event)"
+  />
+}
+@if (!this.data().loading && !this.data().tasks.length) {
+  <div class="no-results">
+    <mat-icon>search_off</mat-icon><strong>No tasks match these filters</strong
+    ><span>Try adjusting your search or filters.</span>
+  </div>
+}

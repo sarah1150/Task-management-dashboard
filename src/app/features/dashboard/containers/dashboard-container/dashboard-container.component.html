@@ -1,0 +1,12 @@
+<main class="dashboard-page">
+  <app-statistics-card [statistics]="statistics()" />
+
+  @if (error()) {
+    <div class="error-banner" role="alert">
+      <mat-icon>error_outline</mat-icon><span>{{ error() }}</span>
+      <button mat-button type="button" (click)="retryLoad()">Retry</button>
+    </div>
+  }
+
+  <app-dashboard-page [data]="dashboardData()"></app-dashboard-page>
+</main>

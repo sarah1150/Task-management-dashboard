@@ -1,0 +1,48 @@
+<article
+  class="task-card"
+  [class.overdue-card]="task().isOverdue"
+  [class.done-card]="task().status === 'done'"
+>
+  <div class="card-topline">
+    <span class="priority" [class]="'priority ' + task().priority">{{ task().priority }}</span>
+    <button
+      mat-icon-button
+      class="card-menu-button"
+      aria-label="Task actions"
+      [matMenuTriggerFor]="taskMenu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #taskMenu="matMenu">
+      <button mat-menu-item (click)="edit.emit(task())">
+        <mat-icon>edit</mat-icon><span>Edit task</span>
+      </button>
+      <button mat-menu-item class="delete-option" (click)="remove.emit(task())">
+        <mat-icon>delete_outline</mat-icon><span>Delete task</span>
+      </button>
+    </mat-menu>
+  </div>
+  <h3>{{ task().title }}</h3>
+  <p class="description">{{ task().description }}</p>
+  <div class="task-meta">
+    <span class="date-line" [class.overdue-text]="task().isOverdue">
+      <mat-icon>{{ task().status === 'done' ? 'check_circle' : 'schedule' }}</mat-icon>
+      @if (task().status === 'done') {
+        Completed {{ task().completedAt | date: 'MMM d' : 'UTC' }}
+      } @else if (task().isOverdue) {
+        Overdue · {{ task().dueDate | date: 'MMM d' : 'UTC' }}
+      } @else {
+        Due {{ task().dueDate | date: 'MMM d' : 'UTC' }}
+      }
+    </span>
+  </div>
+  <div class="card-footer">
+    <span class="avatar" [attr.aria-label]="task().assignee.name">{{
+      task().assignee.avatar
+    }}</span>
+    <span class="assignee-name">{{ task().assignee.name.split(' ')[0] }}</span>
+    @if (task().isOverdue) {
+      <span class="overdue-label">Overdue</span>
+    }
+  </div>
+</article>

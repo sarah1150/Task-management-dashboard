@@ -1,7 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { NavigationItem } from '../types/navigation-item';
-import { MATERIAL_IMPORTS } from '../../shared/material.imports';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MATERIAL_IMPORTS } from '../../shared/material.imports';
+import { NavigationItem } from '../models/navigation-item';
+import { Store } from '@ngrx/store';
+import { selectUsers } from '../../store/selectors/tasks.selectors';
+import { ModalService } from '../../shared/service/modal.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -9,21 +12,23 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./side-bar.component.css'],
   imports: [...MATERIAL_IMPORTS, RouterLink],
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent {
+  private readonly store = inject(Store);
+  private readonly modalService = inject(ModalService);
+  readonly users = this.store.selectSignal(selectUsers);
+  navOpen = signal(false);
   navigation: NavigationItem[] = [
     { label: 'Dashboard', route: '/', icon: 'dashboard.svg' },
-    { label: 'Tasks', route: '/tasks', icon: 'task.svg' },
+    { label: 'Tasks', route: '/', icon: 'task.svg' },
     { label: 'Calendar', route: '/', icon: 'calendar.svg' },
     { label: 'Analytics', route: '/', icon: 'analytics.svg' },
-    { label: 'Team', route: '/team', icon: 'team.svg' },
+    { label: 'Team', route: '/', icon: 'team.svg' },
     { label: 'Settings', route: '/', icon: 'settings.svg' },
   ];
-  navOpen = signal(false);
 
-  constructor() {}
-
-  ngOnInit() {}
-
+  openCreateModal() {
+    this.modalService.openCreate(this.users());
+  }
   closeNavigation(): void {
     this.navOpen.set(false);
   }

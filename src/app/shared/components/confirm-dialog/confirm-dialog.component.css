@@ -1,0 +1,29 @@
+.confirm-icon {
+  width: 42px;
+  height: 42px;
+  margin: 24px 24px 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: #cb3c4d;
+  background: #fff0f1;
+}
+.confirm-icon mat-icon {
+  font-size: 21px;
+  width: 21px;
+  height: 21px;
+}
+h2 {
+  margin: 14px 24px 5px;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 750;
+}
+mat-dialog-content {
+  color: #778295;
+  line-height: 1.55;
+}
+mat-dialog-actions {
+  padding: 8px 24px 21px;
+  gap: 8px;
+}

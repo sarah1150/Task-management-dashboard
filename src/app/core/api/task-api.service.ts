@@ -1,34 +1,34 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { concatMap, from, map, Observable, of, toArray } from 'rxjs';
-import { Task } from '../../features/tasks/models/task';
-import { TaskStatus } from '../../features/tasks/types/task-status';
-import { CreateTask } from '../../features/tasks/types/create-task';
+import { Task } from '../../features/dashboard/models/task';
+import { TaskStatus } from '../../features/dashboard/types/task-status';
+import { TaskDraft } from '../../features/dashboard/types/task-draft';
 
 @Injectable({ providedIn: 'root' })
 export class TaskApiService {
   private readonly http = inject(HttpClient);
 
-  createTask(createdTask: CreateTask): Observable<Task> {
+  createTask(createdTask: TaskDraft): Observable<Task> {
     const now = new Date().toISOString();
     const task: Task = {
       id: `task-${crypto.randomUUID()}`,
-      isOverdue: createdTask.status !== TaskStatus.DONE && createdTask.dueDate < now,
-      completedAt: createdTask.status === TaskStatus.DONE ? now : null,
+      isOverdue: createdTask.status !== 'done' && createdTask.dueDate < now,
+      completedAt: createdTask.status === 'done' ? now : null,
       order: -Date.now(),
       createdAt: now,
       updatedAt: now,
       ...createdTask,
     };
-    return this.http.post<Task>('/api/tasks', task).pipe(map(this.remakeTask));
+    return this.http.post<Task>('/api/tasks', task).pipe(map(this.normalizeTask));
   }
 
-  updateTask(id: string, changes: Partial<CreateTask>): Observable<Task> {
+  updateTask(id: string, changes: Partial<TaskDraft>): Observable<Task> {
     const payload: Partial<Task> = { ...changes, updatedAt: new Date().toISOString() };
     if (changes.status !== undefined) {
-      payload.completedAt = changes.status === TaskStatus.DONE ? new Date().toISOString() : null;
+      payload.completedAt = changes.status === 'done' ? new Date().toISOString() : null;
     }
-    return this.http.patch<Task>(`/api/tasks/${id}`, payload).pipe(map(this.remakeTask));
+    return this.http.patch<Task>(`/api/tasks/${id}`, payload).pipe(map(this.normalizeTask));
   }
 
   moveTask(
@@ -76,13 +76,13 @@ export class TaskApiService {
             order: nextOrder,
             completedAt:
               task.id === id
-                ? status === TaskStatus.DONE
+                ? status === 'done'
                   ? (current.completedAt ?? now)
                   : null
                 : task.completedAt,
             updatedAt: now,
           })
-          .pipe(map(this.remakeTask)),
+          .pipe(map(this.normalizeTask)),
       ),
       toArray(),
     );
@@ -92,11 +92,11 @@ export class TaskApiService {
     return this.http.delete<void>(`/api/tasks/${id}`);
   }
 
-  private remakeTask(task: Task): Task {
+  private normalizeTask(task: Task): Task {
     const now = new Date().toISOString();
     return {
       ...task,
-      isOverdue: task.status !== TaskStatus.DONE && task.dueDate < now,
+      isOverdue: task.status !== 'done' && task.dueDate < now,
       completedAt: task.completedAt ?? null,
       order: task.order ?? 0,
       updatedAt: task.updatedAt ?? new Date().toISOString(),

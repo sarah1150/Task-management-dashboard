@@ -1,0 +1,33 @@
+<div class="board" cdkDropListGroup>
+  @for (column of columns; track column.value) {
+    <section class="board-column" [attr.aria-label]="column.label + ' tasks'">
+      <div class="column-heading">
+        <div class="column-title">
+          <span class="status-dot" [class]="'status-dot ' + column.value"></span>
+          <h2>{{ column.label }}</h2>
+        </div>
+        <span class="task-count">{{ tasksFor(column.value).length }}</span>
+      </div>
+      <div
+        class="column-list"
+        cdkDropList
+        [cdkDropListData]="tasksFor(column.value)"
+        (cdkDropListDropped)="dropTask($event, column.value)"
+        [attr.aria-label]="'Drop tasks into ' + column.label"
+      >
+        @for (task of tasksFor(column.value); track task.id) {
+          <div class="draggable-task" cdkDrag [cdkDragData]="task">
+            <app-task-card
+              [task]="task"
+              (edit)="edit.emit($event)"
+              (remove)="remove.emit($event)"
+            />
+            <div class="drag-placeholder" *cdkDragPlaceholder></div>
+          </div>
+        } @empty {
+          <div class="column-empty"><mat-icon>add_task</mat-icon><span>Drop a task here</span></div>
+        }
+      </div>
+    </section>
+  }
+</div>

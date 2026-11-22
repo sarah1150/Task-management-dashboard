@@ -5,14 +5,17 @@ import { provideStore } from '@ngrx/store';
 import { retryTransientRequestsInterceptor } from './core/api/api-interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
-import { TasksEffects } from './store/tasks/effects/tasks.effects';
+import { TasksEffects } from './store/effects/tasks.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { tasksReducer } from './store/reducers/tasks.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideStore(),
+    provideStore({
+      tasks: tasksReducer,
+    }),
     provideHttpClient(withInterceptors([retryTransientRequestsInterceptor])),
     provideEffects([TasksEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

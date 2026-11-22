@@ -1,0 +1,24 @@
+<section class="stats-grid" aria-label="Task statistics">
+  @for (stat of statistics(); track stat.id) {
+    <article class="stat-card">
+      <div class="stat-heading">
+        <span class="stat-icon" [style.color]="stat.color" aria-hidden="true">{{ stat.icon }}</span>
+        <span>{{ stat.title }}</span>
+      </div>
+      <div class="stat-value">{{ stat.value }}</div>
+      <div
+        class="stat-change"
+        [class.negative]="stat.changeType === 'negative'"
+        [class.neutral]="stat.changeType === 'neutral'"
+      >
+        @if (stat.changeType === 'positive') {
+          <span aria-hidden="true">↗</span>
+        }
+        @if (stat.changeType === 'negative') {
+          <span aria-hidden="true">↘</span>
+        }
+        {{ stat.change }} <span>{{ stat.changeLabel }}</span>
+      </div>
+    </article>
+  }
+</section>

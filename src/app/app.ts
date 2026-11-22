@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { loadStatistics, loadTasks, loadUsers } from './store/actions/tasks.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   imports: [RouterOutlet, NavbarComponent, SideBarComponent],
@@ -10,5 +12,11 @@ import { SideBarComponent } from './layout/side-bar/side-bar.component';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Task-management-dashboard');
+  private readonly store = inject(Store);
+
+  constructor() {
+    this.store.dispatch(loadTasks({}));
+    this.store.dispatch(loadUsers({}));
+    this.store.dispatch(loadStatistics({}));
+  }
 }
