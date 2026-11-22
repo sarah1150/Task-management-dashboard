@@ -10,6 +10,7 @@
     "test:coverage": "ng test --coverage",
     "lint": "ng lint",
     "format": "prettier --write .",
+    "data:generate": "node data-fetching/generate-data.js",
     "prepare": "husky"
   },
   "private": true,

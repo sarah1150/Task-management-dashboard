@@ -15,11 +15,13 @@
     }
   </nav>
 
-  <a
-    [routerLink]="'/create-task'"
-    class="btn btn-primary btn-block d-flex justify-content-center mt-5"
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    class="new-task-button"
+    (click)="openCreateModal()"
   >
-    <mat-icon>add</mat-icon>
-    New Task
-  </a>
+    <mat-icon>add</mat-icon> New task
+  </button>
 </aside>

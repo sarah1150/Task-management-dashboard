@@ -2,8 +2,9 @@ import { httpResource } from '@angular/common/http';
 import { Injectable, Injector, inject, runInInjectionContext } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable, filter, mergeMap, of, take, throwError } from 'rxjs';
-import { Task } from '../../features/tasks/models/task';
-import { TaskStatus } from '../../features/tasks/types/task-status';
+import { Task } from '../../features/dashboard/models/task';
+import { Statistic } from '../../features/dashboard/models/statistic';
+import { Assignee } from '../../features/dashboard/models/assignee';
 
 @Injectable({ providedIn: 'root' })
 
@@ -15,8 +16,16 @@ export class TaskResourceService {
 
   getTasks(): Observable<Task[]> {
     return this.getResource('/api/tasks', []).pipe(
-      mergeMap((tasks) => of(tasks.map((task) => this.refineTaskBody(task)))),
+      mergeMap((tasks) => of(tasks.map((task) => this.refineTaskObj(task)))),
     );
+  }
+
+  getUsers(): Observable<Assignee[]> {
+    return this.getResource('/api/users', []);
+  }
+
+  getStatistics(): Observable<Statistic[]> {
+    return this.getResource('/api/statistics', []);
   }
 
   private getResource<T>(url: string, defaultValue: T): Observable<T> {
@@ -42,11 +51,11 @@ export class TaskResourceService {
     });
   }
 
-  private refineTaskBody(task: Task): Task {
+  private refineTaskObj(task: Task): Task {
     const today = new Date().toISOString().slice(0, 10);
     return {
       ...task,
-      isOverdue: task.status !== TaskStatus.DONE && task.dueDate < today,
+      isOverdue: task.status !== 'done' && task.dueDate < today,
       completedAt: task.completedAt ?? null,
       order: task.order ?? 0,
       updatedAt: task.updatedAt ?? new Date().toISOString(),

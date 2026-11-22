@@ -6,8 +6,15 @@
 
   <label class="global-search">
     <mat-icon>search</mat-icon>
-    <input type="search" placeholder="Search tasks..." aria-label="Search tasks" />
+    <input
+      type="search"
+      placeholder="Search tasks..."
+      [value]="currentQuery()"
+      (input)="updateSearch($event)"
+      aria-label="Search tasks"
+    />
   </label>
+
   <div class="topbar-actions">
     <span class="icon-action" aria-hidden="true">
       <img src="bell.svg" alt="bell" />

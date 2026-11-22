@@ -1,0 +1,41 @@
+.dashboard-page {
+  display: flex;
+  max-width: 1600px;
+  flex-direction: column;
+  gap: 17px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid #f0c5c8;
+  border-radius: 8px;
+  color: #a23d48;
+  background: #fff6f6;
+  font-size: 12px;
+}
+.error-banner mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+.error-banner button {
+  margin-left: auto;
+}
+
+@media (max-width: 860px) {
+  .dashboard-page {
+    padding: 22px 18px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-page {
+    gap: 12px;
+    padding: 17px 12px 25px;
+  }
+}
