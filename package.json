@@ -7,7 +7,7 @@
     "api": "json-server --watch db.json --port 3600",
     "build": "ng build",
     "test": "ng test",
-    "test:coverage": "ng test --coverage",
+    "test:coverage": "ng test --code-coverage",
     "lint": "eslint .",
     "format": "prettier --write .",
     "data:generate": "node data-fetching/generate-data.js",
@@ -30,21 +30,34 @@
     "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.3"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^22.3.0",
     "@angular/build": "^22.3.0",
     "@angular/cli": "^22.3.0",
     "@angular/compiler-cli": "^22.3.0",
     "@eslint/js": "^10.0.1",
+    "@types/jasmine": "^6.0.0",
     "angular-eslint": "^22.8.0",
     "eslint": "^10.15.0",
     "husky": "^9.1.7",
+    "jasmine-core": "^6.0.0",
     "jsdom": "^31.0.0",
     "json-server": "^0.17.4",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.3.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.73.0",
-    "vitest": "^5.0.0"
+    "typescript-eslint": "^8.73.0"
+  },
+  "overrides": {
+    "karma-jasmine": {
+      "jasmine-core": "^6.0.0"
+    }
   }
 }

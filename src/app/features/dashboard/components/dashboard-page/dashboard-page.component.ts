@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MATERIAL_IMPORTS } from '../../../../shared/material.imports';
 import * as TaskActions from '../../../../store/actions/tasks.actions';
@@ -14,12 +14,13 @@ import { ModalService } from '../../../../shared/service/modal.service';
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [...MATERIAL_IMPORTS, TaskBoardComponent],
 })
 export class DashboardPageComponent {
   private readonly store = inject(Store);
   private readonly modalService = inject(ModalService);
-  readonly data = input.required<DashboardData>();
+  data = input.required<DashboardData>();
   readonly statusTabs: readonly { label: string; value: TaskStatus | 'all' }[] = [
     { label: 'All tasks', value: 'all' },
     { label: 'To do', value: 'todo' },
