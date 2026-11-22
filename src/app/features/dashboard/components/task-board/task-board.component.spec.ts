@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { TaskBoardComponent } from './task-board.component';
 
 describe('TaskBoardComponent', () => {
@@ -11,9 +8,8 @@ describe('TaskBoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskBoardComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskBoardComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

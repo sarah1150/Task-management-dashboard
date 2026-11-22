@@ -1,12 +1,12 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { TaskApiService } from './task-api.service';
 
 describe('Service: TaskApi', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TaskApiService]
+      providers: [TaskApiService],
     });
   });
 
