@@ -1,10 +1,13 @@
 .dashboard-page {
+  position: relative;
+  top: 50px;
+  left: 120px;
   display: flex;
-  max-width: 1600px;
+  justify-self: center;
+  max-width: 970px;
   flex-direction: column;
   gap: 17px;
-  margin: 0 auto;
-  padding: 12px;
+  max-height: calc(100vh - 80px);
 }
 
 .error-banner {
@@ -27,15 +30,46 @@
   margin-left: auto;
 }
 
+@media (max-width: 1195px) {
+  .dashboard-page {
+    max-width: 900px;
+    gap: 9px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .dashboard-page {
+    max-width: 780px;
+    gap: 9px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .dashboard-page {
+    max-width: 600px;
+    gap: 9px;
+  }
+}
+
 @media (max-width: 860px) {
   .dashboard-page {
-    padding: 22px 18px 30px;
+    max-width: 500px;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 720px) {
+  .dashboard-page {
+    left: 1px;
+    max-width: 400px;
+    gap: 3px;
   }
 }
 
 @media (max-width: 600px) {
   .dashboard-page {
-    gap: 12px;
-    padding: 17px 12px 25px;
+    left: 1px;
+    max-width: 400px;
+    gap: 3px;
   }
 }

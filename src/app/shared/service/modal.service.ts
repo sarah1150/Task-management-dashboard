@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Task } from '../../features/dashboard/models/task';
@@ -15,6 +15,7 @@ import { Assignee } from '../../features/dashboard/models/assignee';
 export class ModalService {
   private readonly dialog = inject(MatDialog);
   private readonly store = inject(Store);
+  navOpen = signal(false);
 
   openCreate(users: Assignee[]): void {
     const data: TaskFormData = { users };
@@ -59,5 +60,9 @@ export class ModalService {
       .subscribe((confirmed: boolean | undefined) => {
         if (confirmed) this.store.dispatch(TaskActions.deleteTask({ task }));
       });
+  }
+
+  closeNavigation(): void {
+    this.navOpen.set(false);
   }
 }

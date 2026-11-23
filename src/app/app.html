@@ -7,4 +7,12 @@
       <router-outlet />
     </main>
   </div>
+  @if (this.modalService.navOpen()) {
+    <button
+      type="button"
+      class="navigation-backdrop"
+      aria-label="Close navigation"
+      (click)="this.modalService.closeNavigation()"
+    ></button>
+  }
 </div>

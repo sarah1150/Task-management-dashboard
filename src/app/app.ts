@@ -4,6 +4,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
 import { loadStatistics, loadTasks, loadUsers } from './store/actions/tasks.actions';
 import { Store } from '@ngrx/store';
+import { ModalService } from './shared/service/modal.service';
 
 @Component({
   imports: [RouterOutlet, NavbarComponent, SideBarComponent],
@@ -13,6 +14,7 @@ import { Store } from '@ngrx/store';
 })
 export class App {
   private readonly store = inject(Store);
+  protected readonly modalService = inject(ModalService);
 
   constructor() {
     this.store.dispatch(loadTasks({}));

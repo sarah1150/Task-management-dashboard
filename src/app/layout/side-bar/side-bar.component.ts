@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MATERIAL_IMPORTS } from '../../shared/material.imports';
 import { NavigationItem } from '../models/navigation-item';
@@ -15,9 +15,8 @@ import { ModalService } from '../../shared/service/modal.service';
 })
 export class SideBarComponent {
   private readonly store = inject(Store);
-  private readonly modalService = inject(ModalService);
+  protected readonly modalService = inject(ModalService);
   readonly users = this.store.selectSignal(selectUsers);
-  navOpen = signal(false);
   navigation: NavigationItem[] = [
     { label: 'Dashboard', route: '/', icon: 'dashboard.svg' },
     { label: 'Tasks', route: '/', icon: 'task.svg' },
@@ -29,8 +28,5 @@ export class SideBarComponent {
 
   openCreateModal() {
     this.modalService.openCreate(this.users());
-  }
-  closeNavigation(): void {
-    this.navOpen.set(false);
   }
 }

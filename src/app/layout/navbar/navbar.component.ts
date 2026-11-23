@@ -3,6 +3,7 @@ import { MATERIAL_IMPORTS } from '../../shared/material.imports';
 import { Store } from '@ngrx/store';
 import { setTaskFilters } from '../../store/actions/tasks.actions';
 import { selectTaskFilters } from '../../store/selectors/tasks.selectors';
+import { ModalService } from '../../shared/service/modal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ import { selectTaskFilters } from '../../store/selectors/tasks.selectors';
 export class NavbarComponent {
   private readonly store = inject(Store);
   private readonly filters = this.store.selectSignal(selectTaskFilters);
+  protected readonly modalService = inject(ModalService);
 
   updateSearch(event: Event): void {
     const query = (event.target as HTMLInputElement).value;
