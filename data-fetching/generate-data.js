@@ -427,9 +427,6 @@ function writeJsonFile(filename, data) {
   const jsonData = JSON.stringify(data, null, 2);
 
   fs.writeFileSync(filePath, jsonData, 'utf8');
-  const appDataDirectory = path.join(__dirname, '..', 'src', 'app', 'core', 'api', 'data');
-  fs.mkdirSync(appDataDirectory, { recursive: true });
-  fs.writeFileSync(path.join(appDataDirectory, filename), jsonData, 'utf8');
   console.log(`✅ Generated: ${filename}`);
 }
 

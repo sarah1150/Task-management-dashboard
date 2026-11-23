@@ -63,24 +63,6 @@ describe('SideBarComponent', () => {
     expect(component.users()).toEqual(mockUsers);
   });
 
-  it('should initialize navigation as closed', () => {
-    expect(component.navOpen()).toBeFalse();
-  });
-
-  it('should open navigation when navOpen is set to true', () => {
-    component.navOpen.set(true);
-
-    expect(component.navOpen()).toBeTrue();
-  });
-
-  it('should close navigation', () => {
-    component.navOpen.set(true);
-
-    component.closeNavigation();
-
-    expect(component.navOpen()).toBeFalse();
-  });
-
   it('should call openCreate with users from the store', () => {
     component.openCreateModal();
 

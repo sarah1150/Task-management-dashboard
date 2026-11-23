@@ -1,11 +1,11 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.open]="this.modalService.navOpen()">
   <nav class="nav-list">
     @for (item of navigation; track item.label) {
       <a
         class="nav-item"
         [routerLink]="item.route"
         routerLinkActive="active"
-        (click)="closeNavigation()"
+        (click)="this.modalService.closeNavigation()"
       >
         <div class="d-flex gap-2">
           <img [src]="item.icon" [alt]="item.icon" width="20" />

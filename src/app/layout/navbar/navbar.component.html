@@ -4,6 +4,15 @@
     <h5 class="title mb-0">Task Manager</h5>
   </div>
 
+  <button
+    class="mobile-menu-button"
+    mat-icon-button
+    aria-label="Open navigation"
+    (click)="this.modalService.navOpen.set(!this.modalService.navOpen())"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
   <label class="global-search">
     <mat-icon>search</mat-icon>
     <input
